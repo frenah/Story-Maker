@@ -1,0 +1,16 @@
+input {
+	display: inline;
+	border-color: red;
+	border-width: 1px;
+	margin: 5px 20px 5px 20px;
+}
+
+body {
+	background-color: rgb(90,189,49);
+	font-color: rgb(180,89,200);
+	width: 400px;
+}
+
+#HumanInterface {
+	display: block;
+}
