@@ -1,4 +1,7 @@
-//Stores for inoputs
+/* The code needs the story objects at the top of the page so it can append the most up todate story
+*/
+
+//Stores for inputs
 var boxOne = "name";
 var boxTwo = "favourite animal";
 var boxThree = "favourite food";
@@ -123,15 +126,10 @@ $(document).on("keyup", ".input-field", function() {
 ];
 })
 
+/* This is where the code that generates and appends the story.
+*/
 
-
-
-
-
-
-
-
-//Converts entered text into numbers 0-4. My friend wrote this and I dont fully understand it yet 09/03/2017
+//Converts entered text into numbers 0-4 and stores them into the object "alphaStore" My friend wrote this and I dont fully understand how it does it yet :) 09/03/2017
 var alphaStore = {}; for (var i = 65; i <= 90; i++) { alphaStore[String.fromCharCode(i)] = i % 5; }; for (var i = 97; i <= 122; i++) { alphaStore[String.fromCharCode(i)] = (i - 2) % 5; }
 
 //Restricts what can be entered into an input box to letters
@@ -233,39 +231,3 @@ $(document).on("keyup", "#random", function() {
 	$('#sectionFour').replaceWith("<span id='sectionFour'>" + storySectionFour[Math.floor(partFour)] + "</span>");
 	$('#sectionFive').replaceWith("<span id='sectionFive'>" + storySectionFive[Math.floor(partFive)] + "</span>");
 })
-
-
-
-
-
-
-/*
-$(document).on("keyup", "#name", function() {
-	list = this.value.split("");
-	var numericalValues = [];
-	for (var ii = 0; ii < list.length; ii++) {
-		numericalValues[ii] = alphaStore[list[ii]]
-	storyNumber = numericalValues;
-	} 
-	console.log(storyNumber);
-
-		if (list[ii] !== NaN) {											
-		trueList.push(list[ii]);
-	}
-})
-
-
-
-for (var iii = 0; iii < numericalValues.length; iii++) {								// For the length of animals
-	if (numericalValues[iii] !== undefined) {											// if the animals does not = cow
-		trueList.push(numericalValues[iii]);	
-		total = trueList[iii] + total								// add it to the NEW GLOBAL array of animals
-	}																	// AKA
-}	
-
-									
-
-
-
-
-*/
