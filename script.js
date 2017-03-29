@@ -1,4 +1,4 @@
-/* The code needs the story objects at the top of the page so it can append the most up todate story
+/* The code needs the story arrays at the top of the page so it can append the most updated story
 */
 
 //Stores for inputs
@@ -9,14 +9,9 @@ var boxFour = "best friend";
 var boxFive = "???";
 
 //Stores for story sections
-var partOne = 0;
-var partTwo = 0;
-var partThree = 0;
-var partFour = 0;
-var partFive = 0;
+var part = [0, 0, 0, 0, 0];
 
-
-//First Section Of The Story
+//Updates story arrays based on information entered
 $(document).on("keyup", ".input-field", function() {
 	boxOne = $("#name").val();
 	boxTwo = $("#favouriteAnimal").val();
@@ -24,6 +19,7 @@ $(document).on("keyup", ".input-field", function() {
 	boxFour = $("#bestFriend").val();
 	boxFive = $("#random").val();
 
+//First Section Of The Story
 	storySectionOne = [
 //Type 1
 "It was a fine morning. " + boxOne + " was just waking up. They were planning on seeing " + boxFour + " later that day. They suspected that " + boxFour + " was going to flake on them and so they called to confirm plans. After a long conversation they decided they would meet at " 
@@ -36,16 +32,8 @@ boxOne + " was strolling down " + boxFive + " road one fine day when they spotte
 , //Type 5
 "&#34It&#39s been 5 long years " + boxOne + " but we&#39ve finally done it&#34 said the scientist. &#34We&#39ve finally managed to bioengineer you a friend! What would you like your friend to be called&#34? &#34How about " + boxFour + "&#34 " + boxOne + " stated. &#34Excellent choice&#34 said the scientist. &#34So where would you like to go first "+ boxFour + "&#34 " + boxOne + " asked. " + boxFour + " decided to go to "
 ];
-})
 
 //Second Section Of The Story
-$(document).on("keyup", ".input-field", function() {
-	boxOne = $("#name").val();
-	boxTwo = $("#favouriteAnimal").val();
-	boxThree = $("#favouriteFood").val();
-	boxFour = $("#bestFriend").val();
-	boxFive = $("#random").val();
-
 	storySectionTwo = [
 //Type 1
 boxOne + "&#39s house. <br><br>" + boxOne + " started cooking " + boxThree + ". They got a little carried away and started putting " + boxFive + " in it. They were both concerned it would ruin the flavour but in actual fact, it improved it! After lunch " + boxOne + " started talking about the time "  
@@ -58,16 +46,8 @@ boxFour + "&#39s new home. <br><br>It was incredibly spacious and well decorated
 , //Type 5
 "a super secret laboratory.<br><br>It was super high tech. I mean, they even had scientists reverse engineering a " + boxFive + ". It was a super chill lab as well. Like, they didn&#39t even have that strict no pets allowed policy. They even had some " + boxTwo + "s helping them with the reverse engineering. It was the perfect lab. They decided to stay for four months in order to train the friendly and consenting " + boxTwo + "s. They decided their work was done when one day they noticed that "
 ];
-})
 
 //Third Section Of The Story
-$(document).on("keyup", ".input-field", function() {
-	boxOne = $("#name").val();
-	boxTwo = $("#favouriteAnimal").val();
-	boxThree = $("#favouriteFood").val();
-	boxFour = $("#bestFriend").val();
-	boxFive = $("#random").val();
-
 	storySectionThree = [
 //Type 1
 "a " + boxTwo +" was making a massive " + boxThree + ".<br><br> It was quite remarkable really. I mean yeah, they were using " + boxFive + " as an ingredient. But let&#39s not get judgy here. I mean they are just a " + boxTwo + " after all. Once they had made the " + boxThree + " they offered some to everyone in the room. It was quite spectacular really."
@@ -80,16 +60,8 @@ boxFour + " got stuck and started saying &#34" + boxFive + ", " + boxFive + ", "
 , //Type 5
 "people in the same room had started dissecting " + boxFive + "s.<br><br>It was kind of a mood killer. I mean, yeah, scientists reverse engineer " + boxFive + "s all the time but that&#39s not the same as dissecting. Besides, science right? Am I right? I mean everyone loves science, even though a lot of people who talk about science fail to fully understand the basic fundamentals of it but still rabbit on... I mean " + boxTwo + " on about it like they&#39re some kind of expert. They&#39re morans really though. "
 ];
-})
 
 //Forth Section Of The Story
-$(document).on("keyup", ".input-field", function() {
-	boxOne = $("#name").val();
-	boxTwo = $("#favouriteAnimal").val();
-	boxThree = $("#favouriteFood").val();
-	boxFour = $("#bestFriend").val();
-	boxFive = $("#random").val();
-
 	storySectionFour = [
 //Type 1
 "<br><br>It was at this moment " + boxOne + " realised, due to their extensive studies, that this could only mean one thing. It was the start of the zombie apocalypse. This may seem strange to a layman but to any keen scholar of zombiography it makes total sense. " + boxOne + " and " + boxFour + " immediately started preparing. Boarding off windows, locking doors, stashing away all of the " + boxFive +". If anyone could survive the zombie apocalypse, it would be these two. But if that happened, would it really be an apocalypse? #Deepman"
@@ -102,16 +74,8 @@ $(document).on("keyup", ".input-field", function() {
 , //Type 5
 "4.4Coming Soon"
 ];
-})
 
 //Fith Section Of The Story
-$(document).on("keyup", ".input-field", function() {
-	boxOne = $("#name").val();
-	boxTwo = $("#favouriteAnimal").val();
-	boxThree = $("#favouriteFood").val();
-	boxFour = $("#bestFriend").val();
-	boxFive = $("#random").val();
-
 	storySectionFive = [
 //Type 1
 "5.0Coming Soon"
@@ -126,9 +90,6 @@ $(document).on("keyup", ".input-field", function() {
 ];
 })
 
-/* This is where the code that generates and appends the story.
-*/
-
 //Converts entered text into numbers 0-4 and stores them into the object "alphaStore" My friend wrote this and I dont fully understand how it does it yet :) 09/03/2017
 var alphaStore = {}; for (var i = 65; i <= 90; i++) { alphaStore[String.fromCharCode(i)] = i % 5; }; for (var i = 97; i <= 122; i++) { alphaStore[String.fromCharCode(i)] = (i - 2) % 5; }
 
@@ -137,10 +98,19 @@ function checkLetters() {
   this.event.target.value = this.event.target.value.replace(/[^a-zA-Z]+/, '');
 }; 
 
-//STORY BASED ON NAME
-$(document).on("keyup", "#name", function() {
+//This function reappends all of the 5 story elements to the page after updating which paragraph to select
+function renderStory() {
+	$('#sectionOne').replaceWith("<span id='sectionOne'>" + storySectionOne[part[0]] + "</span>");
+	$('#sectionTwo').replaceWith("<span id='sectionTwo'>" + storySectionTwo[part[1]] + "</span>");
+	$('#sectionThree').replaceWith("<span id='sectionThree'>" + storySectionThree[part[2]] + "</span>");
+	$('#sectionFour').replaceWith("<span id='sectionFour'>" + storySectionFour[part[3]] + "</span>");
+	$('#sectionFive').replaceWith("<span id='sectionFive'>" + storySectionFive[part[4]] + "</span>");
+}
 
-	list = this.value.split("");
+//This function calculates the mean number of the letters entered (string) according to alphaStore
+function calculateStoryPart(string)	{
+
+	var list = string.split("");
 	var numericalValues = [];
 	var total = 0;
 
@@ -148,86 +118,18 @@ $(document).on("keyup", "#name", function() {
 		numericalValues[ii] = alphaStore[list[ii]]
 		total = numericalValues[ii] + total
 	}
-	partOne = total/numericalValues.length
-	$('#sectionOne').replaceWith("<span id='sectionOne'>" + storySectionOne[Math.floor(partOne)] + "</span>");
-	$('#sectionTwo').replaceWith("<span id='sectionTwo'>" + storySectionTwo[Math.floor(partTwo)] + "</span>");
-	$('#sectionThree').replaceWith("<span id='sectionThree'>" + storySectionThree[Math.floor(partThree)] + "</span>");
-	$('#sectionFour').replaceWith("<span id='sectionFour'>" + storySectionFour[Math.floor(partFour)] + "</span>");
-	$('#sectionFive').replaceWith("<span id='sectionFive'>" + storySectionFive[Math.floor(partFive)] + "</span>");
-})
+	return Math.floor(total/numericalValues.length);
+}
 
-//STORY BASED ON ANIMAL
-$(document).on("keyup", "#favouriteAnimal", function() {
-
-	list = this.value.split("");
-	var numericalValues = [];
-	var total = 0;
-
-	for (var ii = 0; ii < list.length; ii++) {
-		numericalValues[ii] = alphaStore[list[ii]]
-		total = numericalValues[ii] + total
-	}
-	partTwo = total/numericalValues.length
-	$('#sectionOne').replaceWith("<span id='sectionOne'>" + storySectionOne[Math.floor(partOne)] + "</span>");
-	$('#sectionTwo').replaceWith("<span id='sectionTwo'>" + storySectionTwo[Math.floor(partTwo)] + "</span>");
-	$('#sectionThree').replaceWith("<span id='sectionThree'>" + storySectionThree[Math.floor(partThree)] + "</span>");
-	$('#sectionFour').replaceWith("<span id='sectionFour'>" + storySectionFour[Math.floor(partFour)] + "</span>");
-	$('#sectionFive').replaceWith("<span id='sectionFive'>" + storySectionFive[Math.floor(partFive)] + "</span>");
-})
-
-//STORY BASED ON FOOD
-$(document).on("keyup", "#favouriteFood", function() {
-
-	list = this.value.split("");
-	var numericalValues = [];
-	var total = 0;
-
-	for (var ii = 0; ii < list.length; ii++) {
-		numericalValues[ii] = alphaStore[list[ii]]
-		total = numericalValues[ii] + total
-	}
-	partThree = total/numericalValues.length
-	$('#sectionOne').replaceWith("<span id='sectionOne'>" + storySectionOne[Math.floor(partOne)] + "</span>");
-	$('#sectionTwo').replaceWith("<span id='sectionTwo'>" + storySectionTwo[Math.floor(partTwo)] + "</span>");
-	$('#sectionThree').replaceWith("<span id='sectionThree'>" + storySectionThree[Math.floor(partThree)] + "</span>");
-	$('#sectionFour').replaceWith("<span id='sectionFour'>" + storySectionFour[Math.floor(partFour)] + "</span>");
-	$('#sectionFive').replaceWith("<span id='sectionFive'>" + storySectionFive[Math.floor(partFive)] + "</span>");
-})
-
-//STORY BASED ON FRIEND
-$(document).on("keyup", "#bestFriend", function() {
-
-	list = this.value.split("");
-	var numericalValues = [];
-	var total = 0;
-
-	for (var ii = 0; ii < list.length; ii++) {
-		numericalValues[ii] = alphaStore[list[ii]]
-		total = numericalValues[ii] + total
-	}
-	partFour = total/numericalValues.length
-	$('#sectionOne').replaceWith("<span id='sectionOne'>" + storySectionOne[Math.floor(partOne)] + "</span>");
-	$('#sectionTwo').replaceWith("<span id='sectionTwo'>" + storySectionTwo[Math.floor(partTwo)] + "</span>");
-	$('#sectionThree').replaceWith("<span id='sectionThree'>" + storySectionThree[Math.floor(partThree)] + "</span>");
-	$('#sectionFour').replaceWith("<span id='sectionFour'>" + storySectionFour[Math.floor(partFour)] + "</span>");
-	$('#sectionFive').replaceWith("<span id='sectionFive'>" + storySectionFive[Math.floor(partFive)] + "</span>");
-})
-
-//STORY BASED ON ???
-$(document).on("keyup", "#random", function() {
-
-	list = this.value.split("");
-	var numericalValues = [];
-	var total = 0;
-
-	for (var ii = 0; ii < list.length; ii++) {
-		numericalValues[ii] = alphaStore[list[ii]]
-		total = numericalValues[ii] + total
-	}
-	partFive = total/numericalValues.length
-	$('#sectionOne').replaceWith("<span id='sectionOne'>" + storySectionOne[Math.floor(partOne)] + "</span>");
-	$('#sectionTwo').replaceWith("<span id='sectionTwo'>" + storySectionTwo[Math.floor(partTwo)] + "</span>");
-	$('#sectionThree').replaceWith("<span id='sectionThree'>" + storySectionThree[Math.floor(partThree)] + "</span>");
-	$('#sectionFour').replaceWith("<span id='sectionFour'>" + storySectionFour[Math.floor(partFour)] + "</span>");
-	$('#sectionFive').replaceWith("<span id='sectionFive'>" + storySectionFive[Math.floor(partFive)] + "</span>");
-})
+//Defines fields
+var fields = ["#name", "#favouriteAnimal", "#favouriteFood", "#bestFriend", "#random" ];
+//for loop for the length of part
+for (let ii = 0; ii < part.length; ii++) {
+//Creates an event triggered function for keyup for all story elements with the id given in field
+	$(document).on("keyup", fields[ii], function() {
+//Assigns the mean alpha value of the entered data to part
+		part[ii] = calculateStoryPart(this.value);
+//Writes the updated story
+		renderStory();
+	});
+}
